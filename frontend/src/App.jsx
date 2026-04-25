@@ -11,7 +11,7 @@ function App() {
 
   const fetchItems = async () => {
     try {
-      const res = await axios.get('/api/items');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/items`);
       setItems(res.data);
     } catch (err) {
       console.error('Error fetching items:', err);
@@ -29,7 +29,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/items', formData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/items`, formData);
       fetchItems(); // Refresh the list
       setFormData({
         name: '',
