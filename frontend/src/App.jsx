@@ -54,7 +54,7 @@ function App() {
       fetchItems();
       console.log(`Delete item with ID: ${id}`);
 
-    } catch (error) {
+    } catch (err) {
 
             console.error('Error deleting item:', err);
 
@@ -112,6 +112,7 @@ function App() {
               onChange={handleChange}
               required
             >
+              <option value = "" disabled>Select a category</option>
               <option value="Electronics">Electronics</option>
               <option value="Clothing">Clothing</option>
               <option value="Food">Food</option>
@@ -119,7 +120,7 @@ function App() {
 
             </select>
 
-            ['Electronics', 'Clothing', 'Food', 'Other']
+            
           </div>
 
           {/* TODO (Student): Add input fields for 'description' and 'category' here */}
