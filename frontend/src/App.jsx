@@ -6,7 +6,8 @@ function App() {
   const [formData, setFormData] = useState({
     name: '',
     price: '',
-    // TODO (Student): Add missing fields for the state
+    description: '',
+    category: ''
   });
 
   const fetchItems = async () => {
@@ -47,8 +48,17 @@ function App() {
     // TODO (Student): Implement the delete functionality here
     // Hint: Use axios.delete() and then call fetchItems()
 
-    axios.delete('http://localhost:5000/api/items/',)
-    console.log(`Delete item with ID: ${id}`);
+    try {
+      
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/items/${id}`)
+      fetchItems();
+      console.log(`Delete item with ID: ${id}`);
+
+    } catch (error) {
+
+            console.error('Error deleting item:', err);
+
+    }
   };
 
   return (
@@ -95,13 +105,21 @@ function App() {
 
           <div className="form-group">
             <label>Category: </label>
-            <input
-              type="select"
+            <select
+              
               name="category"
               value={formData.category}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="Electronics">Electronics</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Food">Food</option>
+              <option value="Other">Other</option>
+
+            </select>
+
+            ['Electronics', 'Clothing', 'Food', 'Other']
           </div>
 
           {/* TODO (Student): Add input fields for 'description' and 'category' here */}
@@ -120,9 +138,9 @@ function App() {
               <li key={item._id} className="item-card">
                 <div className="item-details">
                   <h3>{item.name}</h3>
-                  <p>Price: ${item.price}</p>
-                  <p>Description: ${item.description}</p>
-                  <p>Category: ${item.category}</p>
+                  <p>Price: {item.price}</p>
+                  <p>Description: {item.description}</p>
+                  <p>Category: {item.category}</p>
                   {/* TODO (Student): Display 'description' and 'category' here */}
                 </div>
                 <div className="item-actions">
